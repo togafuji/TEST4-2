@@ -1,0 +1,60 @@
+<section class="section">
+　　<div class="container">
+        <article class="panel">
+            <div class="panel-heading">
+                ルーム情報登録
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <%= form_for @book do |f| %>
+                            <div class="col-md-4 select">
+                                <div class="form-group">
+                                <%= f.label :ルーム名 %><br />
+                                <%= f.text_field :room_name, autofocus: true %>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 select">
+                                <div class="form-group">
+                                    <%= f.label :ルーム紹介 %><br />
+                                    <%= f.text_area :room_introduce, autofocus: true %>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="col-md-3 select">
+                                <div class="form-group">
+                                    <%= f.label :料金 %><br />
+                                    <%= f.number_field :fee, autofocus: true %>
+                                </div>
+                            </div>    
+                           
+                            <div class="col-md-4 select">
+                                <div class="form-group">
+                                    <%= f.label :住所 %><br />
+                                    <%= f.text_field :addres, autofocus: true %>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="col-md-4 select">
+                                <div class="form-group">
+                                     <%= f.label :ルーム画像 %><br />
+                                     <%= f.file_field :room_image %>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div><%= f.submit "登録", class: "button is-primary" %></div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

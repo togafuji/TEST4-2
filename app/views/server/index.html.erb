@@ -1,0 +1,28 @@
+<div class = "mainbody">
+  <div class = "topmain">
+    <div class = "sercharea">
+      <img src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_cover_top.jpg" alt = "山の景色">
+         <section class = "serch-design">
+           <p class="form-area-title mb-4">Potepan Shareでまだ体験したことない旅をしよう</p>
+           <p class="form-area-title mb-5">
+             <%= form_tag(search_books_path, :method =>'get') do %>
+             <%= text_field_tag :addres, params[:addres], class: "form-control mb-5", id: "search_area", placeholder:"東京" %> 
+             <%= submit_tag '検索' , class:"form-control btn-primary mb-6"%>
+             <% end %>
+           </section>
+         </div>
+    </div>
+  </div>
+</div>
+          
+     
+      <div class = "container">
+        <h1 class = "smalltitle">おすすめのエリア</h1>
+          <div class = "pointview">
+            <img class = "tokyo" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_tokyo.jpg" alt="東京スカイツリー">
+            <img class = "oosaka" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_osaka.jpg" alt="大阪城">
+　　　　    <img class = "kyoto" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_kyoto.jpg" alt="京都タワー">
+　　　　    <img class = "sapporo" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_sapporo.jpg" alt="札幌時計台">
+          </div>
+      </div>
+  

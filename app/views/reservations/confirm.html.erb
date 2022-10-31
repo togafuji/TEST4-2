@@ -1,0 +1,43 @@
+<div class="container reservations-new">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="reservations-new-nav">
+                <h4 class="reservations-new-check-content">予約内容確認</h4>
+                        
+                        <div class="reservations-new-date-selsct">
+
+                            <%= form_with model:@reservation do |f| %>
+                            <%= f.hidden_field :people %>
+                            <%= f.hidden_field :book_id %>
+                            <%= f.hidden_field :user_id %>
+
+                            <%= f.label :start_date ,"開始日" %><br>
+                            <%= f.hidden_field :start_date %>
+                            <%= f.text_field :start_date, class:"form-control col-md-9 mb-8",:readonly => true %>
+                            <%= f.label :end_date ,"終了日" %><br>
+                            <%= f.hidden_field :end_date %>
+                            <%= f.text_field :end_date, class:"form-control col-md-9 mb-8",:readonly => true %>
+
+
+                            <h6 class="reservations-new-check-content">使用日数 : <%= @reservations.total_day %>日</h6>
+                            <%= f.hidden_field :total_day  %>
+
+                            <h6 class="reservations-new-check-content">人数 : <%= @reservations.people %>人</h6>
+
+                            <%= f.label :total_price ,"合計金額" %><br>
+                            <%= f.hidden_field :total_price %>
+                            <%= f.text_field :total_price, class:"form-control col-md-9 mb-4",:readonly => true %>
+
+                            <p class="reservations-new-check-content">上記内容でよろしければ「予約を確定」を押してください</p>
+                            
+                            
+                        
+                            <%= f.submit "予約を確定" ,class:"col-md-2 btn btn-primary my-3 form-control form-btn"%>
+                            <%= link_to "ルーム詳細に戻る",:back ,class:"btn btn-secondary form-control"%>
+                    <% end %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
