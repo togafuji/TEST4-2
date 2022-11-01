@@ -12,5 +12,8 @@ class Book < ApplicationRecord
   validates :fee, presence: true
   validates :addres, presence: true
   validates :room_image, presence: true
-
+  validate :minfee
+  def minfee
+    errors.add(:fee, "は1円以上にしてください") if fee < 0 
+  end
 end

@@ -1,6 +1,7 @@
 <div class="container room-show">
     <div class="row">
         <div class="col-md-8">
+            <%= render "shared/error", obj: @reservation %>
             <image src=" <%= @book.room_image %> " onerror= "this.src='https://presite-potepancamp-rails-02.herokuapp.com/assets/room01.jpg';" class="room-show-image">
             <div class="room-show-detile">
                 <div class="room-show-profile">

@@ -18,12 +18,12 @@ require "pry"
     @reservation = Reservation.new(reservation_params)
     
     if @reservation.invalid?
-       @books = @reservation.book
+       @book = @reservation.book
        render "new", status: :unprocessable_entity
     else
-      @books = @reservation.book
+      @book = @reservation.book
       @reservation.total_day = (@reservation.end_date - @reservation.start_date)/86400.to_i
-      @reservation.total_price = (@books.fee * @reservation.total_day * @reservation.people).to_i
+      @reservation.total_price = (@book.fee * @reservation.total_day * @reservation.people).to_i
     end
     
   end
