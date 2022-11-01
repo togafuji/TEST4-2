@@ -1,0 +1,28 @@
+<div class="container-fluid room">
+  <h4><%= "検索結果：#{@numbers}件" %></h4>
+  <div class="row room-row">
+    <div class="room-information">
+      <% @books.each do |book| %>
+        <div class="room-frame-inner">
+            <%= link_to controller: 'books', action: 'show', id: book.id do %>
+                <div class="room-image-out">
+                  <%= image_tag book.room_image.url, :alt => 'ルーム画像', class: "frame-room-image" %>
+                  <div class="room-profile">
+                    <p class="room-profile-name">
+                      <%= book.room_name %>
+                    </p>
+                    <p class="room-profile-city">
+                      <%= book.addres %>
+                    </p>
+                    <p class="room-profile-price">
+                      ¥<%= book.fee %>
+                    </p>
+                  </div>
+                </div>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+</div>

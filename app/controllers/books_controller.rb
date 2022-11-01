@@ -23,14 +23,13 @@ class BooksController < ApplicationController
     else
       # binding.pry
       flash[:alert] = "問題が発生しました。"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
 
   def show
     @books = Book.find(params[:id])
-    @reservation = Reservation.new
   end
   
 
@@ -46,21 +45,11 @@ class BooksController < ApplicationController
 
   def search
      @user = current_user
-     @books = Book.where('rooms.address LIKE(?)',"%#{params[:addres]}%")
+     @books = Book.where('books.addres LIKE(?)',"%#{params[:addres]}%")
+     @numbers = @books.count
    if params[:keyword].present?
-     @books = Book.where([ 'books.addres LIKE ? OR books.introduce LIKE ? OR books.room_name LIKE ? ', "%#{params[:keyword]}%","%#{params[:keyword]}%","%#{params[:keyword]}%" ])
+     @books = Book.where([ 'books.addres LIKE ? OR books.room_introduce LIKE ? OR books.room_name LIKE ? ', "%#{params[:keyword]}%","%#{params[:keyword]}%","%#{params[:keyword]}%" ])
+     @numbers = @books.count
    end
   end
-
-  
-  private
-    
-    def book_params
-      params.require(:book).permit(:room_name, :room_introduce, :fee, :addres, :room_image)
-    end
-    
-    def reservation_params
-      params.require(:book).permit(:room_name,:room_introduce,:fee,:addres,:room_image,:user_id)
-    end
-
 end

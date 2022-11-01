@@ -1,41 +1,34 @@
 <div class="container room-show">
     <div class="row">
         <div class="col-md-8">
-            <image src=" <%= @books.room_image %> " onerror= "this.src='https://presite-potepancamp-rails-02.herokuapp.com/assets/room01.jpg';" class="room-show-image">
-
+            <image src=" <%= @book.room_image %> " onerror= "this.src='https://presite-potepancamp-rails-02.herokuapp.com/assets/room01.jpg';" class="room-show-image">
             <div class="room-show-detile">
-                <div class="room-show-detile-icon">
-                    <%=link_to root_path do %>
-                     <img src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon.jpg" class="host-icon">
-                    <% end %>
-                </div>
-
                 <div class="room-show-profile">
                     <p class="room-show-profile-name">
-                        部屋名　<%= @books.room_name %>
+                        部屋名　<%= @book.room_name %>
                     </p>
                     <p class="room-show-profile-address">
-                        住所　<%= @books.addres %>
+                        住所　<%= @book.addres %>
                     </p>
                 </div>
             </div>
             <p class="room-show-detile-content">
-            部屋紹介　<%= @books.room_introduce %>
+            部屋紹介　<%= @book.room_introduce %>
             </p>
             <p class="room-show-profile-address">
-            料金　<%= @books.fee %>円/１日
+            料金　<%= @book.fee %>円/１日
             </p>
         </div>
 
         <div class="col-md-4">
             <div class="room-show-nav">
-                <%= form_with url: confirm_book_reservations_path, method: 'post', local: true do |f| %>
-                <%= f.hidden_field :book_id, :value => @books.id %>
+                <%= form_with url: confirm_reservations_path, data: {turbo: false} do |f| %>
+                <%= f.hidden_field :book_id, :value => @book.id %>
                 <%= f.hidden_field :user_id, :value => @user.id %>
                 
                     <div class="room-show-date-select">
                         <%= f.label :book_id ,"部屋ID"%>
-                        <%= @books.id%>　<br><br>
+                        <%= @book.id%>　<br><br>
                         
                         <%= f.label :start_date ,"開始日"%>
                         <%= f.date_field :start_date ,class:"form-control mb-7" %>

@@ -1,5 +1,7 @@
 class ReservationsController < ApplicationController
 
+require "pry"
+
   def index
     @user = current_user
     @reservations = Reservation.all
@@ -7,31 +9,34 @@ class ReservationsController < ApplicationController
 
   def new
     @user = current_user
-    @books = Book.find(params[:book_id])
+    @book = Book.find(params[:id])
     @reservation = Reservation.new
   end
 
   def confirm
     @user = current_user
-    @reservations = Reservation.new(params.permit(:book_id,:user_id,:start_date,:end_date,:price,:total_price,:people,:total_day))
+    @reservation = Reservation.new(reservation_params)
     
-    if @reservations.invalid?
-      @books = @reservations.book
-      render "new"
+    if @reservation.invalid?
+       @books = @reservation.book
+       render "new", status: :unprocessable_entity
     else
-     @books = @reservations.book
-     @reservations.total_day = (@reservations.end_date - @reservations.start_date).to_i
-     @reservations.total_price = (@books.fee * @reservations.total_day * @reservations.people).to_i
+      @books = @reservation.book
+      @reservation.total_day = (@reservation.end_date - @reservation.start_date)/86400.to_i
+      @reservation.total_price = (@books.fee * @reservation.total_day * @reservation.people).to_i
     end
     
   end
 
   def create
-    @reservation = Reservation.new(params.permit(:book_id,:user_id,:start_date,:end_date,:price,:total_price,:people,:total_day))
+    @reservation = Reservation.new(params.require(:reservation).permit(:book_id,:user_id,:start_date,:end_date,:price,:total_price,:people,:total_day))
+    # binding.pry
     if params[:back] || !@reservation.save
-      render "index"
+       render "index", status: :unprocessable_entity
+    #binding.pry
     else
-      redirect_to  book_reservations_path, notice: "予約が完了しました"
+       redirect_to  reservations_path(@reservation), notice: "予約が完了しました"
+    #binding.pry
     end
   end
 
@@ -39,7 +44,6 @@ class ReservationsController < ApplicationController
     @user = current_user
     @reservation = Reservation.find(params[:id])
     @books = @reservation.book_id
-
   end 
 
   private

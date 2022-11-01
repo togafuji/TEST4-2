@@ -14,12 +14,12 @@
             <% @books.each do |book| %>
                 <tr>
                     <td>
-                    <%= image_tag book.room_image.url %> 
+                    <%= image_tag book.room_image.url, :size => '240x140' %> 
                     </td>
                     <td class="posts-name"><%= link_to "#{book.room_name}", {controller: 'books', action: 'show', id: book.id} %> </td>
                     <td class="posts-content"><%= book.room_introduce %></td>
                     <td class="price-icon"><%= book.fee%></td>   
-                    <td><%= book.created_at.strftime('%Y/%m/%d %H:%M:%S')  %></td>   
+                    <td><%= book.created_at.strftime('%Y-%m-%d')  %></td>   
                 </tr>
             <% end %>
         </tbody>

@@ -1,32 +1,44 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <title>Server</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   </head>
 
   <body>
     <header>
-      <a href="/server/index"><img src = "https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png" class = "logo"></a>
-        <div class = "logcontainer">
+        <a href="/server/index"><img src = "https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png" class = "logo"></a>
+           <%= form_with url: search_books_path, data: {turbo: false} do |f| %>
+              <div class = "search_form">
+                <%= f.text_field :addres, class: "header-input", placeholder: "エリア" %>
+                <i class="fa-solid fa-location-dot"></i>
+                <%= f.text_field :keyword, class: "header-input", placeholder: "キーワード" %>
+                <%= f.submit :search, class: "hidden-btn" %>
+           <% end %>      
+              </div>
+      
+      <div class = "logcontainer">
           <% if user_signed_in? %>
-            <%= image_tag current_user.avatar.url %>
-            <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li class="menu_li"><%= link_to "ルーム登録", new_book_path %></li>
-                  <li class="menu_li"><%= link_to "登録済みルーム一覧", books_path %></li>
-                  <li class="menu_li"><%= link_to "プロフィール変更", edit_user_registration_path %></li>
-                  <li class="menu_li"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-            </div>
-            </div>
+          <p class = "user-name"><%= current_user.name %></p>
+          <div class="dropdown">
+            <button type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag current_user.avatar.url, :size => '70x45' %>
+           </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><%= link_to "ルーム登録", new_book_path, class:"dropdown-item" %></li>
+              <li><%= link_to "登録済みルーム一覧", books_path, class:"dropdown-item" %></li>
+              <li><%= link_to "予約済みルーム一覧", reservations_path, class:"dropdown-item" %></li>
+              <li><%= link_to "プロフィール変更", edit_user_registration_path, class:"dropdown-item" %></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"dropdown-item" %></li>
+            </ul>
+          </div>
+      </div>
           <% else %>
             <%= link_to new_user_registration_path do %>
               <button class="btn btn-primary mr-2">新規登録</button>
@@ -35,13 +47,23 @@
               <button class="btn btn-success ml-2">ログイン</button>
             <% end %>
 　　　    <% end %>  
-　　　  </div>
     </header>
-        <div class="notice"><%= notice %></div>
-  　     <div class="alert"><%= alert %></div>
+    
+        <div class="notice-message">
+      <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
+      <% end %>
+    </div>
+
+    <div class="alert-message">
+    <% if flash[:alert] %>
+      <p class="alert"><%= flash[:alert] %></p>
+    <% end %>
+  </div>
     <%= yield %>
-    <footer>
-      <p class = "footertitle">© 2020 POTEPAN.INC.</p>　
-    </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <footer>
+    <p>© 2020 POTEPAN.INC.</p>　
+  </footer>
   </body>
 </html>

@@ -21,14 +21,13 @@ Rails.application.routes.draw do
     end
   end
 
- resources :books do
     resources :reservations do
     collection do
-    post 'confirm' 
+    post 'confirm'
     end
   end
     
- end 
+
 
     # get 'books/new'
   # resources :users, only: [:show]
