@@ -1,0 +1,27 @@
+<div class="container-fiuld reservations">
+    <h4 class="pb-4">登録済みルーム一覧</h4>
+    <table>
+        <thead>
+            <tr align="center">
+                <th>ルーム画像</th>
+                <th>ルーム名</th>
+                <th>ルーム紹介</th>
+                <th>料金</th>
+                <th>作成日</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @books.each do |book| %>
+                <tr>
+                    <td>
+                    <%= image_tag book.room_image.url, :size => '240x140' %> 
+                    </td>
+                    <td class="posts-name"><%= link_to "#{book.room_name}", {controller: 'books', action: 'show', id: book.id} %> </td>
+                    <td class="posts-content"><%= book.room_introduce %></td>
+                    <td class="price-icon"><%= book.fee%></td>   
+                    <td><%= book.created_at.strftime('%Y-%m-%d')  %></td>   
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

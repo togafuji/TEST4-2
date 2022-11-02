@@ -1,0 +1,37 @@
+
+
+<div class = "show-all">
+  <div class = "book-show">
+    <h3>ルーム詳細</h3>
+     <table>
+       <tr>
+        <td><%= image_tag @books.room_image.url,:size => '400x280'%></td>
+       </tr>
+      <tr>
+     </table>
+  </div>
+ 
+  <div class = "book-detail">
+    <table>
+       <th>ルーム名</th>
+       <td><%= @books.room_name %></td>
+     </tr>
+     <tr>
+       <th>ルーム紹介</th>
+       <td><%= @books.room_introduce %></td>
+     </tr>
+     <tr>
+       <th>料金/日</th>
+       <td><%= @books.fee %></td>
+     </tr>
+     <tr>
+       <th>住所</th>
+       <td><%= @books.addres %></td>
+     </tr>
+   </table>
+     <%= link_to "予約する", {controller: 'reservations', action: 'new', id: @books.id},{class: "book-room"} %>
+ </div>
+
+</div>
+
+ 

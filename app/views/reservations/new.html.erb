@@ -1,0 +1,46 @@
+<div class="container room-show">
+    <div class="row">
+        <div class="col-md-8">
+            <%= render "shared/error", obj: @reservation %>
+            <image src=" <%= @book.room_image %> " onerror= "this.src='https://presite-potepancamp-rails-02.herokuapp.com/assets/room01.jpg';" class="room-show-image">
+            <div class="room-show-detile">
+                <div class="room-show-profile">
+                    <p class="room-show-profile-name">
+                        部屋名　<%= @book.room_name %>
+                    </p>
+                    <p class="room-show-profile-address">
+                        住所　<%= @book.addres %>
+                    </p>
+                </div>
+            </div>
+            <p class="room-show-detile-content">
+            部屋紹介　<%= @book.room_introduce %>
+            </p>
+            <p class="room-show-profile-address">
+            料金　<%= @book.fee %>円/１日
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <div class="room-show-nav">
+                <%= form_with url: confirm_reservations_path, data: {turbo: false} do |f| %>
+                <%= f.hidden_field :book_id, :value => @book.id %>
+                <%= f.hidden_field :user_id, :value => @user.id %>
+                
+                    <div class="room-show-date-select">
+                        <%= f.label :book_id ,"部屋ID"%>
+                        <%= @book.id%>　<br><br>
+                        
+                        <%= f.label :start_date ,"開始日"%>
+                        <%= f.date_field :start_date ,class:"form-control mb-7" %>
+                        <%= f.label :end_date ,"終了日"%>
+                        <%= f.date_field :end_date ,class:"form-control mb-7" %>
+                        <%= f.label :people ,"人数"%>
+                        <%= f.number_field :people ,class:"form-control mb-7" %>
+                        <%= f.submit "予約する",class:"form-control btn btn-primary"%>
+                    </div>
+                <% end %>
+            </div>
+        </div>    
+    </div>
+</div>

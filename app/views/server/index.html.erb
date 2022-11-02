@@ -1,0 +1,28 @@
+<div class = "mainbody">
+  <div class = "topmain">
+    <div class = "sercharea">
+      <img src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_cover_top.jpg" alt = "山の景色">
+         <section class = "serch-design">
+           <p class="form-area-title mb-4">Potepan Shareでまだ体験したことない旅をしよう</p>
+           <p class="form-area-title mb-5">
+             <%= form_with url: {controller: 'books', action: 'search' }, data: {turbo: false} do |f| %>
+             <%= f.text_field :addres, class: "body-input", placeholder: "東京" %>
+             <%= submit_tag '検索' , class:"btn-primary mb-6"%>
+             <% end %>
+           </section>
+         </div>
+    </div>
+  </div>
+</div>
+          
+     
+      <div class = "container">
+        <h1 class = "smalltitle">おすすめのエリア</h1>
+          <div class = "pointview">
+            <img class = "tokyo" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_tokyo.jpg" alt="東京スカイツリー" width="240" height="360">
+            <img class = "oosaka" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_osaka.jpg" alt="大阪城" width="240" height="360">
+　　　　    <img class = "kyoto" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_kyoto.jpg" alt="京都タワー" width="240" height="360">
+　　　　    <img class = "sapporo" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_sapporo.jpg" alt="札幌時計台" width="240" height="360">
+          </div>
+      </div>
+  
